@@ -57,6 +57,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Imagine that traceback!
   - `nil` will get passed to the `apache2_site` Resource? TK
   - Flow of Resource processing will break here? TK
@@ -87,6 +88,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
 
 
@@ -108,8 +110,10 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - What gets logged TK
   - DRY approach
+
 
 * Prefer `Chef::Log` over `log()`.
 
@@ -122,8 +126,10 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Line shows up twice in the log TK
   - `log()` is not usable within LWRPs.
+
 
 * No `log` or `Chef::Log` needed within a Resource.
   
@@ -141,7 +147,9 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Chef will already log when it's collecting a processing a Resource.
+
 
 * Don't use static Unix-style paths.
 
@@ -154,7 +162,9 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Where's `/etc/ssl` on NTFS? :)
+
 
 * You can use `$globals` to pass constants around Recipes. TK
 * If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
@@ -168,7 +178,9 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - Just look at the output! TK
+
 
 * Why put on 5 lines what you can put on one, for under 80 characters!
 
@@ -184,7 +196,9 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
+
   - File this under personal preference. TK
+
 
 * Treat an LWRP's Resource definition as an analog of a method envelope.
 
