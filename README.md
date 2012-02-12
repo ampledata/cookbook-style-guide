@@ -57,11 +57,10 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Imagine that traceback!
-  2. `nil` will get passed to the `apache2_site` Resource? TK
-  3. Flow of Resource processing will break here? TK
-  4. It's easier to test for the existence of a key.
+  - Imagine that traceback!
+  - `nil` will get passed to the `apache2_site` Resource? TK
+  - Flow of Resource processing will break here? TK
+  - It's easier to test for the existence of a key.
 
 
 * If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
@@ -88,8 +87,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
+  - Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
 
 
 * Include conditionals within a Resource.
@@ -110,10 +108,8 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. What gets logged TK
-  2. DRY approach
- 
+  - What gets logged TK
+  - DRY approach
 
 * Prefer `Chef::Log` over `log()`.
 
@@ -126,10 +122,8 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Line shows up twice in the log TK
-  2. `log()` is not usable within LWRPs.
-
+  - Line shows up twice in the log TK
+  - `log()` is not usable within LWRPs.
 
 * No `log` or `Chef::Log` needed within a Resource.
   
@@ -147,9 +141,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Chef will already log when it's collecting a processing a Resource.
-
+  - Chef will already log when it's collecting a processing a Resource.
 
 * Don't use static Unix-style paths.
 
@@ -162,9 +154,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Where's `/etc/ssl` on NTFS? :)
-
+  - Where's `/etc/ssl` on NTFS? :)
 
 * You can use `$globals` to pass constants around Recipes. TK
 * If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
@@ -178,9 +168,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. Just look at the output! TK
-
+  - Just look at the output! TK
 
 * Why put on 5 lines what you can put on one, for under 80 characters!
 
@@ -196,9 +184,7 @@ guidiance, in order of precidence, are:
   ```
 
   Justification:
-
-  1. File this under personal preference. TK
-
+  - File this under personal preference. TK
 
 * Treat an LWRP's Resource definition as an analog of a method envelope.
 
