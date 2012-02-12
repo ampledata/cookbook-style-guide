@@ -7,6 +7,7 @@ My intent with this document is to collect the best practices and
 guidelines to assist Opscode Chef Cookbook authors create code that is
 readable, maintainable, and easy to use.
 
+
 # Authoritative Sources
 
 The inspirations for this document, as well as a fallback sources of
@@ -16,12 +17,14 @@ guidiance, in order of precidence, are:
 * Google's [Python Style Guide](http://google-styleguide.googlecode.com/svn/trunk/pyguide.html)
 * Python's [PEP-8](http://www.python.org/dev/peps/pep-0008/)
 
+
 # Alternative Sources
 
 * Opscode's [Cookbook Style Guide Draft](http://wiki.opscode.com/display/chef/Cookbook+Style+Guide+Draft)
 * Opscode's [Cookbook Style-Guide Outline](http://wiki.opscode.com/display/chef/Cookbook+Style-Guide+Outline)
 
-# Opscode Chef Cookbook Style Guide
+
+# Chef Cookbook Style Guide
 
 * Organize a Recipe as you would a Ruby program.
   TK
@@ -30,6 +33,7 @@ guidiance, in order of precidence, are:
   1. imports
   2. constants
   3. resources
+
 
 * Use constants for Resource paramaters.
 
@@ -59,6 +63,7 @@ guidiance, in order of precidence, are:
   3. Flow of Resource processing will break here? TK
   4. It's easier to test for the existence of a key.
 
+
 * If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
 * Better yet, more than a few lines of Ruby in an LWRP might fare better as a Library.
 * Organize a Resources paramaters for easy program flow interpretation.
@@ -86,6 +91,7 @@ guidiance, in order of precidence, are:
 
   1. Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
 
+
 * Include conditionals within a Resource.
 
   ```Ruby
@@ -108,6 +114,7 @@ guidiance, in order of precidence, are:
   1. What gets logged TK
   2. DRY approach
  
+
 * Prefer `Chef::Log` over `log()`.
 
   ```Ruby
@@ -122,6 +129,7 @@ guidiance, in order of precidence, are:
 
   1. Line shows up twice in the log TK
   2. `log()` is not usable within LWRPs.
+
 
 * No `log` or `Chef::Log` needed within a Resource.
   
@@ -142,6 +150,7 @@ guidiance, in order of precidence, are:
 
   1. Chef will already log when it's collecting a processing a Resource.
 
+
 * Don't use static Unix-style paths.
 
   ```Ruby
@@ -155,6 +164,7 @@ guidiance, in order of precidence, are:
   Justification:
 
   1. Where's `/etc/ssl` on NTFS? :)
+
 
 * You can use `$globals` to pass constants around Recipes. TK
 * If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
@@ -171,7 +181,8 @@ guidiance, in order of precidence, are:
 
   1. Just look at the output! TK
 
-# Why put on 5 lines what you can put on one, for under 80 characters!
+
+* Why put on 5 lines what you can put on one, for under 80 characters!
 
   ```Ruby
   # Yes
@@ -188,7 +199,8 @@ guidiance, in order of precidence, are:
 
   1. File this under personal preference. TK
 
-# Treat an LWRP's Resource definition as an analog of a method envelope.
+
+* Treat an LWRP's Resource definition as an analog of a method envelope.
 
   ```Ruby
   # Here's a pure-ruby example of a method envelope:
