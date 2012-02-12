@@ -26,7 +26,7 @@ guidiance, in order of precidence, are:
 
 # Chef Cookbook Style Guide
 
-* Organize a Recipe as you would a Ruby program.
+### Organize a Recipe as you would a Ruby program.
   TK
   e.g.
 
@@ -35,7 +35,7 @@ guidiance, in order of precidence, are:
   3. resources
 
 
-* Use constants for Resource paramaters.
+### Use constants for Resource paramaters.
 
   ```Ruby
   # Yes
@@ -56,19 +56,20 @@ guidiance, in order of precidence, are:
   end
   ```
 
-  Justification:
+#### Justification
 
-  - Imagine that traceback!
-  - `nil` will get passed to the `apache2_site` Resource? TK
-  - Flow of Resource processing will break here? TK
-  - It's easier to test for the existence of a key.
+  1. Imagine that traceback!
+  2. `nil` will get passed to the `apache2_site` Resource? TK
+  3. Flow of Resource processing will break here? TK
+  4. It's easier to test for the existence of a key.
 
 
-* If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
-* Better yet, more than a few lines of Ruby in an LWRP might fare better as a Library.
-* Organize a Resources paramaters for easy program flow interpretation.
+### If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
+### Better yet, more than a few lines of Ruby in an LWRP might fare better as a Library.
+### Organize a Resources paramaters for easy program flow interpretation.
   
   I don't like this example:
+
   ```Ruby
   # Yes
   some_resource 'some_name' do
@@ -87,12 +88,12 @@ guidiance, in order of precidence, are:
   end
   ```
 
-  Justification:
+#### Justification
 
-  - Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
+  1. Readers can quickly determine what weather the Resource will run, and on what conidtions it will run.
 
 
-* Include conditionals within a Resource.
+### Include conditionals within a Resource.
 
   ```Ruby
   # Yes
@@ -109,13 +110,13 @@ guidiance, in order of precidence, are:
   end
   ```
 
-  Justification:
+#### Justification
 
-  - What gets logged TK
-  - DRY approach
+  1. What gets logged TK
+  2. DRY approach
 
 
-* Prefer `Chef::Log` over `log()`.
+### Prefer `Chef::Log` over `log()`.
 
   ```Ruby
   # Yes
@@ -125,13 +126,13 @@ guidiance, in order of precidence, are:
   log "Hey look, I'm a webserver!"
   ```
 
-  Justification:
+#### Justification
 
-  - Line shows up twice in the log TK
-  - `log()` is not usable within LWRPs.
+  1. Line shows up twice in the log TK
+  2. `log()` is not usable within LWRPs.
 
 
-* No `log` or `Chef::Log` needed within a Resource.
+### No `log` or `Chef::Log` needed within a Resource.
   
   ```Ruby
   # Yes
@@ -146,12 +147,12 @@ guidiance, in order of precidence, are:
   end
   ```
 
-  Justification:
+#### Justification
 
-  - Chef will already log when it's collecting a processing a Resource.
+  1. Chef will already log when it's collecting a processing a Resource.
 
 
-* Don't use static Unix-style paths.
+### Don't use static Unix-style paths.
 
   ```Ruby
   # Yes
@@ -161,13 +162,13 @@ guidiance, in order of precidence, are:
   ETC_SSL = '/etc/ssl'
   ```
 
-  Justification:
+#### Justification
 
-  - Where's `/etc/ssl` on NTFS? :)
+  1. Where's `/etc/ssl` on NTFS? :)
 
 
-* You can use `$globals` to pass constants around Recipes. TK
-* If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
+### You can use `$globals` to pass constants around Recipes. TK
+### If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
 
   ```Ruby
   # Yes
@@ -177,12 +178,12 @@ guidiance, in order of precidence, are:
   Chef::Log.debug("This Node's EC2 information is #{node['ec2']")
   ```
 
-  Justification:
+#### Justification
 
-  - Just look at the output! TK
+  1. Just look at the output! TK
 
 
-* Why put on 5 lines what you can put on one, for under 80 characters!
+### Why put on 5 lines what you can put on one, for under 80 characters!
 
   ```Ruby
   # Yes
@@ -195,12 +196,12 @@ guidiance, in order of precidence, are:
   g.run_action(:install)
   ```
 
-  Justification:
+#### Justification
 
-  - File this under personal preference. TK
+  1. File this under personal preference. TK
 
 
-* Treat an LWRP's Resource definition as an analog of a method envelope.
+### Treat an LWRP's Resource definition as an analog of a method envelope.
 
   ```Ruby
   # Here's a pure-ruby example of a method envelope:
