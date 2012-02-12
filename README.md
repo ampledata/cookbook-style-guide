@@ -1,3 +1,6 @@
+THIS WORK IS IN PROGRESS. FORKS WELCOME, BUT SUBSTANTIAL WORK REMAINS.
+ - Greg Albrecht 2012-02-12
+
 # Introduction
 
 My intent with this document is to collect the best practices and
@@ -42,10 +45,11 @@ TK
   ```
 
   Why:
+
   # what gets logged TK
   # DRY approach
  
-* Prefer ```Ruby Chef::Log``` over ```Ruby log()```.
+* Prefer ```Chef::Log``` over ```log()```.
 
   ```Ruby
   # Yes
@@ -56,8 +60,9 @@ TK
   ```
 
   Why:
+
   # Line shows up twice in the log TK
-  # ```Ruby log()``` is not usable within LWRPs.
+  # ```log()``` is not usable within LWRPs.
 
 
   
