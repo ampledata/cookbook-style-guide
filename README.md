@@ -27,13 +27,31 @@ guidiance, in order of precidence, are:
 # Chef Cookbook Style Guide
 
 ### Organize a Recipe as you would a Ruby program.
-  TK
-  e.g.
+  #### Includes & Requires
+    - Includes and requires are always put at the top of a Recipe, just
+      after comments, and before globals and constants.
 
-  1. imports
-  2. constants
-  3. resources
+      ```Ruby
+      # Yes
+      include 'right_aws'
 
+      require_recipe 'apache2::mod_ssl'
+
+
+      tacos = 'delicious'
+
+      package 'mysql' do
+        action :upgrade
+      end
+
+
+      # No
+      tacos = 'delicious'
+      package 'mysql' do
+        action :upgrade
+      end
+      require_recipe 'apache2::mod_ssl'
+      ```
 
 ### Use constants for Resource paramaters.
 
