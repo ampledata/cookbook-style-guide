@@ -20,6 +20,7 @@ guidiance, in order of precidence, are:
 
 # Alternative Sources
 
+* [foodcritic](http://acrmp.github.com/foodcritic/)
 * Opscode's [Cookbook Style Guide Draft](http://wiki.opscode.com/display/chef/Cookbook+Style+Guide+Draft)
 * Opscode's [Cookbook Style-Guide Outline](http://wiki.opscode.com/display/chef/Cookbook+Style-Guide+Outline)
 
