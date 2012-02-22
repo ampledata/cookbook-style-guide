@@ -62,7 +62,7 @@ require_recipe 'apache2::mod_ssl'
 ## LWRPs
 * If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
 * Better yet, more than a few lines of Ruby in an LWRP might fare better as a Library.
-
+** See also: [FC014: Consider extracting long ruby_block to library](http://acrmp.github.com/foodcritic/#FC014)
 
 ### Treat an LWRP's Resource definition as an analog of a method envelope.
 **A pure-ruby example of a method envelope:**
@@ -143,6 +143,10 @@ end
 
 
 ### Include conditionals within a Resource.
+#### See also
+* [FC023: Prefer conditional attributes](http://acrmp.github.com/foodcritic/#FC023)
+* [Recipe Resources: Conditional Execution](http://wiki.opscode.com/display/chef/Resources#Resources-ConditionalExecution)
+
 #### Justification
   1. What gets logged TK
   2. DRY approach
