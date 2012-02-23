@@ -38,7 +38,7 @@ TODO(gba): Integrate Opscode's guides into this one.
 
   **Good**
 
-    ```ruby
+    ~~~~Ruby
     include 'right_aws'
 
     require_recipe 'apache2::mod_ssl'
@@ -49,7 +49,7 @@ TODO(gba): Integrate Opscode's guides into this one.
     package 'mysql' do
       action :upgrade
     end
-    ```
+    ~~~~
 
   **Bad**
 
