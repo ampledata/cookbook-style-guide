@@ -39,6 +39,18 @@ TODO(gba): Integrate Opscode's guides into this one.
   **Good**
 
     ```Ruby
+    # good
+    def some_method
+      do_something
+    end
+
+    # bad - four spaces
+    def some_method
+        do_something
+    end
+    ```
+
+    ```Ruby
     include 'right_aws'
 
     require_recipe 'apache2::mod_ssl'
