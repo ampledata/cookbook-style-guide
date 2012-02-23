@@ -36,30 +36,30 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Organize a Recipe as you would a Ruby program.
 * Ruby `include` and Chef `require_recipe` are always put at the top of a Recipe, just after comments, and before globals and constants.
 
-**Good**
+  **Good**
 
-```ruby
-include 'right_aws'
+    ```ruby
+    include 'right_aws'
 
-require_recipe 'apache2::mod_ssl'
+    require_recipe 'apache2::mod_ssl'
 
 
-tacos = 'delicious'
+    tacos = 'delicious'
 
-package 'mysql' do
-  action :upgrade
-end
-```
+    package 'mysql' do
+      action :upgrade
+    end
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-tacos = 'delicious'
-package 'mysql' do
-  action :upgrade
-end
-require_recipe 'apache2::mod_ssl'
-```
+    ```ruby
+    tacos = 'delicious'
+    package 'mysql' do
+      action :upgrade
+    end
+    require_recipe 'apache2::mod_ssl'
+    ```
 
 
 ## LWRPs
@@ -69,19 +69,19 @@ require_recipe 'apache2::mod_ssl'
 
 * Treat an LWRP's Resource definition as an analog of a method envelope.
 
-**A pure-ruby example of a method envelope:**
+  **A pure-ruby example of a method envelope:**
 
-```ruby
-def my_method(food='taco', price=2):
-  puts "Here's a delicious #{food} for $#{price}!"
-```
+    ```ruby
+    def my_method(food='taco', price=2):
+      puts "Here's a delicious #{food} for $#{price}!"
+    ```
 
-**Pseudo-equivalent Resource definition in Chef:**
+  **Pseudo-equivalent Resource definition in Chef:**
 
-```ruby
-attribute :food, :kind_of => String, :required => false, :default => 'taco', :regex => /\w+/
-attribute :price, :kind_of => [Integer, Float], :required => false, :default => 1
-```
+    ```ruby
+    attribute :food, :kind_of => String, :required => false, :default => 'taco', :regex => /\w+/
+    attribute :price, :kind_of => [Integer, Float], :required => false, :default => 1
+    ```
 
 
 ## Recipes
@@ -91,53 +91,53 @@ attribute :price, :kind_of => [Integer, Float], :required => false, :default => 
   3. Flow of Resource processing will break here? TK
   4. It's easier to test for the existence of a key.
 
-**Good**
+  **Good**
 
-```ruby
-fqdn_items = data_bag_item('servers', 'fqdn')
-web_fqdn = fqdn_items['web_fqdn']
+    ```ruby
+    fqdn_items = data_bag_item('servers', 'fqdn')
+    web_fqdn = fqdn_items['web_fqdn']
   
-apache2_site 'main website' do
-  action :enable
-  server_name web_fqdn
-end
-```
+    apache2_site 'main website' do
+      action :enable
+      server_name web_fqdn
+    end
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-fqdn_items = data_bag_item('servers', 'fqdn')
+    ```ruby
+    fqdn_items = data_bag_item('servers', 'fqdn')
   
-apache2_site 'main website' do
-  action :enable
-  server_name fqdn_items['web_fqdn']
-end
-```
+    apache2_site 'main website' do
+      action :enable
+      server_name fqdn_items['web_fqdn']
+    end
+    ```
 
 * Organize a Resources parameters for easy program flow interpretation.
   1. Readers can quickly determine weather the Resource will run, and on what conditions it will run.
 
-**Good**
+  **Good**
+  
+    ```ruby
+    some_resource 'some_name' do
+      action :some_action
+      not_if{ some_condition }
+      param1 some_paramater1
+      param2 some_paramater2
+    end
+    ```
 
-```ruby
-some_resource 'some_name' do
-  action :some_action
-  not_if{ some_condition }
-  param1 some_paramater1
-  param2 some_paramater2
-end
-```
+  **Bad**
 
-**Bad**
-
-```ruby
-some_resource 'some_name' do
-  param1 some_paramater1
-  param2 some_paramater2
-  action :some_action
-  not_if{ some_condition}
-end
-```
+    ```ruby
+    some_resource 'some_name' do
+      param1 some_paramater1
+      param2 some_paramater2
+      action :some_action
+      not_if{ some_condition}
+    end
+    ```
 
 
 * Include conditionals within a Resource.
@@ -146,76 +146,76 @@ end
   3. What gets logged TK
   4. DRY approach
 
-**Good**
+  **Good**
 
-```Ruby
-service 'apach2' do
-  action [:enable, :start]
-  only_if{ node['webserver'] }
-end
-```
+    ```Ruby
+    service 'apach2' do
+      action [:enable, :start]
+      only_if{ node['webserver'] }
+    end
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-if node['webserver']
-  service 'apache2' do
-    action [:enable, :start]
-  end
-end
-```
+    ```ruby
+    if node['webserver']
+      service 'apache2' do
+        action [:enable, :start]
+      end
+    end
+    ```
 
 * Prefer `Chef::Log` over `log()`.
   1. Line shows up twice in the log TK
   2. `log()` is not usable within LWRPs.
 
-**Good**
+  **Good**
 
-```ruby
-Chef::Log.info("Hey look, I'm a webserver!")
-```
+    ```ruby
+    Chef::Log.info("Hey look, I'm a webserver!")
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-log "Hey look, I'm a webserver!"
-```
+    ```ruby
+    log "Hey look, I'm a webserver!"
+    ```
 
 
 * Do not use `log` or `Chef::Log` within a Resource.
   1. Chef will already log when it's collecting a processing a Resource.
 
-**Good**
+  **Good**
 
-```ruby
-service 'apache2' do
-  action [:enable, :start]
-end
-```
+    ```ruby
+    service 'apache2' do
+      action [:enable, :start]
+    end
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-service 'apache2' do
-  action [:enable, :start]
-  Chef::Log.info('Enabling apache2 service.')
-end
-```
+    ```ruby
+    service 'apache2' do
+      action [:enable, :start]
+      Chef::Log.info('Enabling apache2 service.')
+    end
+    ```
 
 * Don't use static Unix-style paths.
   1. Where's `/etc/ssl` on NTFS? :)
 
-**Good**
+  **Good**
 
-```Ruby
-ETC_SSL = ::File.join(::File::SEPARATOR, 'etc', 'ssl')
-```
+    ```ruby
+    ETC_SSL = ::File.join(::File::SEPARATOR, 'etc', 'ssl')
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-ETC_SSL = '/etc/ssl'
-```
+    ```ruby
+    ETC_SSL = '/etc/ssl'
+    ```
 
 
 ## Hints
@@ -223,32 +223,32 @@ ETC_SSL = '/etc/ssl'
 * Why put on 5 lines what you can put on one, for under 80 characters!
   1. File this under personal preference. TK
 
-**Good**
+  **Good**
 
-```ruby
-gem_package('right_aws'){ action :nothing }.run_action(:install)
-```
+    ```ruby
+    gem_package('right_aws'){ action :nothing }.run_action(:install)
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-g = gem_package 'right_aws' do
-  action :nothing
-end
-g.run_action(:install)
-```
+    ```ruby
+    g = gem_package 'right_aws' do
+      action :nothing
+    end
+    g.run_action(:install)
+    ```
 
 
 * If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
 
-**Good**
+  **Good**
 
-```Ruby
-Chef::Log.debug("This Node's EC2 information is #{node['ec2'].inspect}")
-```
+    ```ruby
+    Chef::Log.debug("This Node's EC2 information is #{node['ec2'].inspect}")
+    ```
 
-**Bad**
+  **Bad**
 
-```ruby
-Chef::Log.debug("This Node's EC2 information is #{node['ec2']")
-```
+    ```ruby
+    Chef::Log.debug("This Node's EC2 information is #{node['ec2']")
+    ```
