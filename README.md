@@ -115,7 +115,7 @@ TODO(gba): Integrate Opscode's guides into this one.
   ```
 
 * Organize a Resources parameters for easy program flow interpretation.
-  1. Readers can quickly determine weather the Resource will run, and on what conditions it will run.
+  1. Readers can quickly determine whether the Resource will run, and on what conditions it will run.
 
   **Good**
   
