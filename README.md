@@ -32,6 +32,31 @@ TODO(gba): Integrate Opscode's guides into this one.
 
 # Chef Cookbook Style Guide
 
+* Use `UTF-8` as the source file encoding.
+* Use two **spaces** per indentation level.
+
+    ```Ruby
+    # good
+    def some_method
+      do_something
+    end
+
+    # bad - four spaces
+    def some_method
+        do_something
+    end
+    ```
+
+* Use Unix-style line endings. (*BSD/Solaris/Linux/OSX users are covered by default,
+  Windows users have to be extra careful.)
+    * If you're using Git you might want to add the following
+    configuration setting to protect your project from Windows line
+    endings creeping in:
+
+        ```$ git config --global core.autocrlf true```
+
+* Use spaces around operators, after commas, colons and semicolons, around `{`
+
 ## Recipe Organization
 * Organize a Recipe as you would a Ruby program.
 * Ruby `include` and Chef `require_recipe` are always put at the top of a Recipe, just after comments, and before globals and constants.
