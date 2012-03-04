@@ -35,10 +35,9 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Organize a Recipe as you would a Ruby program.
 * Ruby `include` and Chef `require_recipe` are always put at the top of a Recipe, just after comments, and before globals and constants.
 
-  **Good**
-
 
   ```Ruby
+  # Good
   include 'right_aws'
 
   require_recipe 'apache2::mod_ssl'
@@ -49,11 +48,9 @@ TODO(gba): Integrate Opscode's guides into this one.
   package 'mysql' do
     action :upgrade
   end
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   tacos = 'delicious'
   package 'mysql' do
     action :upgrade
@@ -91,9 +88,9 @@ TODO(gba): Integrate Opscode's guides into this one.
   3. Flow of Resource processing will break here? TK
   4. It's easier to test for the existence of a key.
 
-  **Good**
 
   ```ruby
+  # Good
   fqdn_items = data_bag_item('servers', 'fqdn')
   web_fqdn = fqdn_items['web_fqdn']
   
@@ -101,11 +98,9 @@ TODO(gba): Integrate Opscode's guides into this one.
     action :enable
     server_name web_fqdn
   end
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   fqdn_items = data_bag_item('servers', 'fqdn')
   
   apache2_site 'main website' do
@@ -117,20 +112,17 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Organize a Resources parameters for easy program flow interpretation.
   1. Readers can quickly determine whether the Resource will run, and on what conditions it will run.
 
-  **Good**
-  
   ```ruby
+  # Good
   some_resource 'some_name' do
     action :some_action
     not_if{ some_condition }
     param1 some_paramater1
     param2 some_paramater2
   end
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   some_resource 'some_name' do
     param1 some_paramater1
     param2 some_paramater2
@@ -146,18 +138,15 @@ TODO(gba): Integrate Opscode's guides into this one.
   3. What gets logged TK
   4. DRY approach
 
-  **Good**
-
   ```Ruby
+  # Good
   service 'apach2' do
     action [:enable, :start]
     only_if{ node['webserver'] }
   end
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   if node['webserver']
     service 'apache2' do
     action [:enable, :start]
@@ -169,15 +158,12 @@ TODO(gba): Integrate Opscode's guides into this one.
   1. Line shows up twice in the log TK
   2. `log()` is not usable within LWRPs.
 
-  **Good**
-
   ```ruby
+  # Good
   Chef::Log.info("Hey look, I'm a webserver!")
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   log "Hey look, I'm a webserver!"
   ```
 
@@ -185,17 +171,14 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Do not use `log` or `Chef::Log` within a Resource.
   1. Chef will already log when it's collecting a processing a Resource.
 
-  **Good**
-
   ```ruby
+  # Good
   service 'apache2' do
     action [:enable, :start]
   end
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   service 'apache2' do
     action [:enable, :start]
     Chef::Log.info('Enabling apache2 service.')
@@ -205,15 +188,12 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Don't use static Unix-style paths.
   1. Where's `/etc/ssl` on NTFS? :)
 
-  **Good**
-
   ```ruby
+  # Good
   ETC_SSL = ::File.join(::File::SEPARATOR, 'etc', 'ssl')
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   ETC_SSL = '/etc/ssl'
   ```
 
@@ -223,15 +203,12 @@ TODO(gba): Integrate Opscode's guides into this one.
 * Why put on 5 lines what you can put on one, for under 80 characters!
   1. File this under personal preference. TK
 
-  **Good**
-
   ```ruby
+  # Good
   gem_package('right_aws'){ action :nothing }.run_action(:install)
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   g = gem_package 'right_aws' do
     action :nothing
   end
@@ -241,14 +218,11 @@ TODO(gba): Integrate Opscode's guides into this one.
 
 * If logging a Hash, use it's built-in `inspect()` method. This works for Node Mashes also.
 
-  **Good**
-
   ```ruby
+  # Good
   Chef::Log.debug("This Node's EC2 information is #{node['ec2'].inspect}")
-  ```
 
-  **Bad**
 
-  ```ruby
+  # Bad
   Chef::Log.debug("This Node's EC2 information is #{node['ec2']")
   ```
