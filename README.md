@@ -20,7 +20,6 @@ guidance, in order of precedence, are:
 
 TODO(gba): Integrate Andrew's guide into this one.
 
-
 # Alternative Sources
 
 Alternative guidelines are available at:
@@ -33,7 +32,8 @@ TODO(gba): Integrate Opscode's guides into this one.
 # Chef Cookbook Style Guide
 ## Recipe Organization
 * Organize a Recipe as you would a Ruby program.
-* Ruby `include` and Chef `require_recipe` are always put at the top of a Recipe, just after comments, and before globals and constants.
+* Ruby `include` and Chef `require_recipe` are always put at the top of a 
+Recipe, just after comments, and before globals and constants.
 
 
     ```Ruby
@@ -60,8 +60,10 @@ TODO(gba): Integrate Opscode's guides into this one.
 
 
 ## LWRPs
-* If a Recipe contains more than a few lines of pure Ruby, you might fare better with a LWRP.
-* Better yet, more than a few lines of Ruby in an LWRP might fare better as a Library.
+* If a Recipe contains more than a few lines of pure Ruby, you might fare 
+better with a Lightweight Resource Provider (LWRP).
+* Better yet, more than a few lines of Ruby in an LWRP might fare better as a 
+Library.
   1. See also: [FC014: Consider extracting long ruby_block to library](http://acrmp.github.com/foodcritic/#FC014)
 
 * Treat an LWRP's Resource definition as an analog of a method envelope.
@@ -107,7 +109,8 @@ TODO(gba): Integrate Opscode's guides into this one.
     ```
 
 * Organize a Resources parameters for easy program flow interpretation.
-  1. Readers can quickly determine whether the Resource will run, and on what conditions it will run.
+  1. Readers can quickly determine whether the Resource will run, and on what 
+  conditions it will run.
 
     ```ruby
     # Good
