@@ -154,9 +154,11 @@ Library.
     end
     ```
 
-* Prefer `Chef::Log` over `log()`.
+* Prefer `Chef::Log` over `log`.
   1. Line shows up twice in the log TK
-  2. `log()` is not usable within LWRPs.
+  2. `log` is not usable within LWRPs.
+  3. `log` writes to the log during convergence, not compilation; use `log` in a Recipe when you want to declare a log entry during compilation but trigger the log entry during convergence; use `Chef::Log` when you want to log normally.
+
 
     ```ruby
     # Good
