@@ -64,8 +64,9 @@ Library.
 
     ```ruby
     # Example of a Ruby method:
-    def my_method(food='taco', price=2):
+    def my_method(food='taco', price=2)
       puts "Here's a delicious #{food} for $#{price}!"
+    end
   
   
     # Example of a Resource definition in Chef:
